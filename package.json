@@ -1,14 +1,16 @@
 {
   "name": "jwt-auth-suite",
   "version": "1.0.0",
-  "description": "A comprehensive JWT authentication helper library with TypeScript support",
+  "description": "A comprehensive JWT authentication helper library with TypeScript support, designed to make JWT-based authentication simple and powerful for Node.js applications.",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
     "prepublishOnly": "npm run build",
-    "test": "echo 'No tests specified' && exit 0"
+    "test": "echo 'No tests specified' && exit 0",
+    "clean": "rm -rf lib",
+    "prepare": "npm run build"
   },
   "keywords": [
     "jwt",
@@ -24,9 +26,19 @@
     "rate-limiting",
     "refresh-token",
     "password-hashing",
-    "blacklist"
+    "blacklist",
+    "nodejs",
+    "token",
+    "session",
+    "login",
+    "permission",
+    "role"
   ],
-  "author": "Hemal Joshi",
+  "author": {
+    "name": "Hemal Joshi",
+    "email": "hemaljoshi738@gmail.com",
+    "url": "https://github.com/hemaljoshi"
+  },
   "license": "MIT",
   "dependencies": {
     "bcrypt": "^5.1.1",

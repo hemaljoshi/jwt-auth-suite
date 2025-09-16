@@ -388,5 +388,5 @@ export {
     MetricType
 } from './metrics';
 
-// Default export
-export default { initAuth, createAuth };
+const jwtAuthSuite = { initAuth, createAuth };
+export default jwtAuthSuite;
