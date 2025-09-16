@@ -1,6 +1,6 @@
 # JWT Auth Suite 🔐
 
-[![npm version](https://badge.fury.io/js/jwt-auth-suite.svg)](https://badge.fury.io/js/jwt-auth-suite)
+[![npm version](https://img.shields.io/npm/v/jwt-auth-suite.svg)](https://www.npmjs.com/package/jwt-auth-suite)
 [![npm downloads](https://img.shields.io/npm/dm/jwt-auth-suite.svg)](https://www.npmjs.com/package/jwt-auth-suite)
 [![license](https://img.shields.io/npm/l/jwt-auth-suite.svg)](https://github.com/hemaljoshi/jwt-auth-suite/blob/main/LICENSE)
 [![Node.js Version](https://img.shields.io/node/v/jwt-auth-suite.svg)](https://nodejs.org/)
