@@ -1,4 +1,4 @@
-# SuperJWT 🔐
+# JWT Auth Suite 🔐
 
 A comprehensive JWT authentication helper library with TypeScript support, designed to make JWT-based authentication simple and powerful for Node.js applications.
 
@@ -44,7 +44,7 @@ A comprehensive JWT authentication helper library with TypeScript support, desig
 ## Installation
 
 ```bash
-npm install superjwt
+npm install jwt-auth-suite
 ```
 
 ## Getting Started (5 Minutes)
@@ -52,13 +52,13 @@ npm install superjwt
 ### Step 1: Install the Package
 
 ```bash
-npm install superjwt
+npm install jwt-auth-suite
 ```
 
 ### Step 2: Basic Setup
 
 ```javascript
-const { initAuth } = require("superjwt");
+const { initAuth } = require("jwt-auth-suite");
 
 const auth = initAuth({
   secret: "your-secret-key-here", // Use a strong secret in production
@@ -105,9 +105,9 @@ curl -H "Authorization: Bearer YOUR_TOKEN" http://localhost:3000/profile
 ### Basic Authentication (initAuth)
 
 ```javascript
-const { initAuth } = require("superjwt");
+const { initAuth } = require("jwt-auth-suite");
 // or
-import { initAuth } from "superjwt";
+import { initAuth } from "jwt-auth-suite";
 
 const auth = initAuth({
   secret: process.env.JWT_SECRET,
@@ -127,7 +127,7 @@ app.get("/profile", auth.protect(), (req, res) => {
 ### Production Authentication (createAuth)
 
 ```javascript
-const { createAuth } = require("superjwt");
+const { createAuth } = require("jwt-auth-suite");
 
 const auth = createAuth({
   secret: process.env.JWT_SECRET,
@@ -197,7 +197,7 @@ app.get(
 
 ### Understanding the Difference
 
-SuperJWT provides two main functions for different use cases:
+JWT Auth Suite provides two main functions for different use cases:
 
 | Feature                    | initAuth | createAuth |
 | -------------------------- | -------- | ---------- |
@@ -223,7 +223,7 @@ Use `initAuth` for:
 - ✅ **Small projects** - Don't need production features
 
 ```javascript
-const { initAuth } = require("superjwt");
+const { initAuth } = require("jwt-auth-suite");
 
 const auth = initAuth({
   secret: process.env.JWT_SECRET,
@@ -248,7 +248,7 @@ Use `createAuth` for:
 - ✅ **Compliance needs** - Security logging required
 
 ```javascript
-const { createAuth } = require("superjwt");
+const { createAuth } = require("jwt-auth-suite");
 
 const auth = createAuth({
   secret: process.env.JWT_SECRET,
@@ -362,7 +362,7 @@ app.use("/api", router);
 
 ```javascript
 const express = require("express");
-const { createAuth } = require("superjwt");
+const { createAuth } = require("jwt-auth-suite");
 
 const app = express();
 app.use(express.json());
@@ -612,7 +612,7 @@ const auth = createAuth({
 
 ### Understanding the System
 
-SuperJWT uses a **role-based access control (RBAC)** system where:
+JWT Auth Suite uses a **role-based access control (RBAC)** system where:
 
 1. **Roles** are broad categories (e.g., `admin`, `moderator`, `user`)
 2. **Permissions** are specific actions (e.g., `read`, `write`, `delete`, `manage_users`)
@@ -785,7 +785,7 @@ app.get("/public", auth.optional(), (req, res) => {
 ### Advanced Usage
 
 ```javascript
-const { createAuth } = require("superjwt");
+const { createAuth } = require("jwt-auth-suite");
 
 const auth = createAuth(config);
 
@@ -809,7 +809,7 @@ const isAdmin = auth.isAdmin(user);
 
 ## Error Handling
 
-SuperJWT provides standardized error responses:
+JWT Auth Suite provides standardized error responses:
 
 ```javascript
 // Error response format
@@ -841,7 +841,7 @@ import {
   User,
   JWTPayload,
   ErrorMessageKeys,
-} from "superjwt";
+} from "jwt-auth-suite";
 
 const config: AuthConfig = {
   secret: process.env.JWT_SECRET!,
@@ -967,7 +967,7 @@ app.get(
 You can also create custom rate limiters for specific needs:
 
 ```javascript
-const { RateLimiter, MemoryRateLimitStorage } = require("superjwt");
+const { RateLimiter, MemoryRateLimitStorage } = require("jwt-auth-suite");
 
 // Custom rate limiter for file uploads
 const fileUploadLimiter = new RateLimiter(
@@ -1159,7 +1159,7 @@ const auth = createAuth({
 
 ```javascript
 const express = require("express");
-const { createAuth } = require("superjwt");
+const { createAuth } = require("jwt-auth-suite");
 
 const app = express();
 app.use(express.json());
@@ -1195,7 +1195,7 @@ app.listen(3000);
 
 ```javascript
 // pages/api/profile.js
-import { createAuth } from "superjwt";
+import { createAuth } from "jwt-auth-suite";
 
 const auth = createAuth({
   secret: process.env.JWT_SECRET,
@@ -1217,7 +1217,7 @@ export default function handler(req, res) {
 ```javascript
 // Note: Fastify adapter coming in future release
 const fastify = require("fastify");
-const { createAuth } = require("superjwt");
+const { createAuth } = require("jwt-auth-suite");
 
 const app = fastify();
 const auth = createAuth({
@@ -1234,11 +1234,11 @@ app.register(auth.fastifyPlugin);
 ```typescript
 // Note: NestJS adapter coming in future release
 import { Module } from "@nestjs/common";
-import { SuperJWTModule } from "superjwt/nestjs";
+import { JWTAuthSuiteModule } from "jwt-auth-suite/nestjs";
 
 @Module({
   imports: [
-    SuperJWTModule.forRoot({
+    JWTAuthSuiteModule.forRoot({
       secret: process.env.JWT_SECRET,
       roles: ["admin", "user"],
       enableRateLimiting: true,
@@ -1360,11 +1360,11 @@ app.get("/admin", auth.tenantMiddleware.requireTenantAdmin(), (req, res) => {
 
 ### Multi-Device Login Support
 
-**Yes! SuperJWT fully supports multi-device login.** The same user can have multiple active sessions across different devices with different access tokens and refresh tokens.
+**Yes! JWT Auth Suite fully supports multi-device login.** The same user can have multiple active sessions across different devices with different access tokens and refresh tokens.
 
 #### **🌍 Internationalization (i18n) Support**
 
-SuperJWT includes built-in i18n support for multi-login messages and error handling:
+JWT Auth Suite includes built-in i18n support for multi-login messages and error handling:
 
 ```javascript
 const { createAuth, ErrorMessageKeys } = require("superjwt");
@@ -1928,12 +1928,12 @@ Here's a complete example showing the full flow from user registration to access
 
 ```javascript
 const express = require("express");
-const { initAuth } = require("superjwt");
+const { initAuth } = require("jwt-auth-suite");
 
 const app = express();
 app.use(express.json());
 
-// Initialize SuperJWT
+// Initialize JWT Auth Suite
 const auth = initAuth({
   secret: process.env.JWT_SECRET,
   accessExpiry: "15m",
@@ -2381,7 +2381,7 @@ app.post("/refresh-role", auth.protect(), async (req, res) => {
 
 ### Q: Can I use this with databases like MongoDB, PostgreSQL, etc.?
 
-A: Yes! SuperJWT is database-agnostic. Just implement the user lookup functions for your database:
+A: Yes! JWT Auth Suite is database-agnostic. Just implement the user lookup functions for your database:
 
 ```javascript
 // MongoDB example
@@ -2392,7 +2392,7 @@ async function getUserByEmail(email) {
 
 ### Q: Can the same user be logged in on multiple devices?
 
-A: **Yes!** SuperJWT fully supports multi-device login. The same user can have multiple active sessions across different devices, each with their own access and refresh tokens. This is handled through device IDs and token families. See the [Multi-Device Login Support](#multi-device-login-support) section for details.
+A: **Yes!** JWT Auth Suite fully supports multi-device login. The same user can have multiple active sessions across different devices, each with their own access and refresh tokens. This is handled through device IDs and token families. See the [Multi-Device Login Support](#multi-device-login-support) section for details.
 
 ### Q: How do I manage user sessions across multiple devices?
 
@@ -2539,7 +2539,7 @@ return result.rows[0];
 
 ### Q: How does JWT blacklisting work?
 
-A: JWT blacklisting allows you to invalidate tokens before they expire. SuperJWT supports three storage backends:
+A: JWT blacklisting allows you to invalidate tokens before they expire. JWT Auth Suite supports three storage backends:
 
 - **Memory**: Fast but not persistent (good for development)
 - **Redis**: Fast and persistent (recommended for production)
@@ -2574,7 +2574,7 @@ const result = await auth.rotateRefreshToken(oldRefreshToken, user);
 
 ### Q: How do I implement multi-tenancy?
 
-A: SuperJWT provides built-in multi-tenant support for SaaS applications:
+A: JWT Auth Suite provides built-in multi-tenant support for SaaS applications:
 
 ```javascript
 // Enable tenants
@@ -2596,7 +2596,7 @@ app.use(auth.tenantMiddleware.resolveTenant());
 
 ### Q: How secure is the password hashing?
 
-A: SuperJWT uses bcrypt with configurable salt rounds (default: 12). It also includes password strength validation:
+A: JWT Auth Suite uses bcrypt with configurable salt rounds (default: 12). It also includes password strength validation:
 
 ```javascript
 // Hash password with custom salt rounds

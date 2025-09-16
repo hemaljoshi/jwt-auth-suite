@@ -3,19 +3,19 @@ import { AuthError, ErrorCodes } from './types';
 /**
  * Custom error class for authentication errors
  */
-export class SuperJWTError extends Error implements AuthError {
+export class JWTAuthSuiteError extends Error implements AuthError {
     public code: string;
     public statusCode: number;
 
     constructor(message: string, code: string, statusCode: number = 401) {
         super(message);
-        this.name = 'SuperJWTError';
+        this.name = 'JWTAuthSuiteError';
         this.code = code;
         this.statusCode = statusCode;
 
         // Maintains proper stack trace for where our error was thrown
         if (Error.captureStackTrace) {
-            Error.captureStackTrace(this, SuperJWTError);
+            Error.captureStackTrace(this, JWTAuthSuiteError);
         }
     }
 }
@@ -23,8 +23,8 @@ export class SuperJWTError extends Error implements AuthError {
 /**
  * Create a token missing error
  */
-export function createTokenMissingError(): SuperJWTError {
-    return new SuperJWTError(
+export function createTokenMissingError(): JWTAuthSuiteError {
+    return new JWTAuthSuiteError(
         'Access token is missing',
         ErrorCodes.TOKEN_MISSING,
         401
@@ -34,8 +34,8 @@ export function createTokenMissingError(): SuperJWTError {
 /**
  * Create a token invalid error
  */
-export function createTokenInvalidError(): SuperJWTError {
-    return new SuperJWTError(
+export function createTokenInvalidError(): JWTAuthSuiteError {
+    return new JWTAuthSuiteError(
         'Access token is invalid',
         ErrorCodes.TOKEN_INVALID,
         401
@@ -45,8 +45,8 @@ export function createTokenInvalidError(): SuperJWTError {
 /**
  * Create a token expired error
  */
-export function createTokenExpiredError(): SuperJWTError {
-    return new SuperJWTError(
+export function createTokenExpiredError(): JWTAuthSuiteError {
+    return new JWTAuthSuiteError(
         'Access token has expired',
         ErrorCodes.TOKEN_EXPIRED,
         401
@@ -56,8 +56,8 @@ export function createTokenExpiredError(): SuperJWTError {
 /**
  * Create an insufficient permissions error
  */
-export function createInsufficientPermissionsError(required: string[]): SuperJWTError {
-    return new SuperJWTError(
+export function createInsufficientPermissionsError(required: string[]): JWTAuthSuiteError {
+    return new JWTAuthSuiteError(
         `Insufficient permissions. Required: ${required.join(', ')}`,
         ErrorCodes.INSUFFICIENT_PERMISSIONS,
         403
@@ -67,8 +67,8 @@ export function createInsufficientPermissionsError(required: string[]): SuperJWT
 /**
  * Create an invalid role error
  */
-export function createInvalidRoleError(required: string[]): SuperJWTError {
-    return new SuperJWTError(
+export function createInvalidRoleError(required: string[]): JWTAuthSuiteError {
+    return new JWTAuthSuiteError(
         `Invalid role. Required: ${required.join(', ')}`,
         ErrorCodes.INVALID_ROLE,
         403
@@ -78,8 +78,8 @@ export function createInvalidRoleError(required: string[]): SuperJWTError {
 /**
  * Create a configuration error
  */
-export function createConfigError(message: string): SuperJWTError {
-    return new SuperJWTError(
+export function createConfigError(message: string): JWTAuthSuiteError {
+    return new JWTAuthSuiteError(
         `Configuration error: ${message}`,
         ErrorCodes.CONFIG_ERROR,
         500
@@ -87,16 +87,16 @@ export function createConfigError(message: string): SuperJWTError {
 }
 
 /**
- * Check if an error is a SuperJWT error
+ * Check if an error is a JWT Auth Suite error
  */
-export function isSuperJWTError(error: any): error is SuperJWTError {
-    return error instanceof SuperJWTError;
+export function isJWTAuthSuiteError(error: any): error is JWTAuthSuiteError {
+    return error instanceof JWTAuthSuiteError;
 }
 
 /**
  * Format error for API response
  */
-export function formatErrorResponse(error: SuperJWTError) {
+export function formatErrorResponse(error: JWTAuthSuiteError) {
     return {
         error: {
             code: error.code,

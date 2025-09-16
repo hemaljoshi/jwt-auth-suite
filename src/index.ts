@@ -14,7 +14,7 @@ import { SecurityLogger, securityLogger } from './security-logger';
 import { MetricsCollector, metricsCollector } from './metrics';
 
 /**
- * Initialize SuperJWT authentication system
+ * Initialize JWT Auth Suite authentication system
  */
 export function initAuth(config: AuthConfig): AuthInstance {
     // Validate required configuration

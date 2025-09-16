@@ -8,7 +8,7 @@ import {
     createInsufficientPermissionsError,
     createInvalidRoleError,
     formatErrorResponse,
-    isSuperJWTError
+    isJWTAuthSuiteError
 } from './errors';
 
 /**
@@ -148,7 +148,7 @@ export class MiddlewareFactory {
      * Handle authentication errors
      */
     private handleError(error: any, res: Response): void {
-        if (isSuperJWTError(error)) {
+        if (isJWTAuthSuiteError(error)) {
             res.status(error.statusCode).json(formatErrorResponse(error));
         } else {
             res.status(500).json({

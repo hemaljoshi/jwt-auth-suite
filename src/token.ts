@@ -122,7 +122,7 @@ export class TokenManager {
                 throw createTokenInvalidError();
             } else if (error instanceof jwt.NotBeforeError) {
                 throw createTokenInvalidError();
-            } else if (isSuperJWTError(error)) {
+            } else if (isJWTAuthSuiteError(error)) {
                 throw error;
             } else {
                 throw createTokenInvalidError();
@@ -170,7 +170,7 @@ export class TokenManager {
     }
 }
 
-// Helper function to check if error is SuperJWT error
-function isSuperJWTError(error: any): error is Error {
-    return error instanceof Error && error.name === 'SuperJWTError';
+// Helper function to check if error is JWT Auth Suite error
+function isJWTAuthSuiteError(error: any): error is Error {
+    return error instanceof Error && error.name === 'JWTAuthSuiteError';
 }
